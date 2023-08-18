@@ -54,8 +54,7 @@ add_library(vins_lib
         src/initial/initial_sfm.cpp
         src/initial/initial_ex_rotation.cpp
         src/feature_tracker/feature_tracker.cpp)
-target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} /usr/local/lib/libSophus.so
-)
+target_link_libraries(vins_lib ${catkin_LIBRARIES} ${OpenCV_LIBS} ${CERES_LIBRARIES} )
 
 add_library(estimator_nodelet src/estimator_nodelet.cpp)
 target_link_libraries(estimator_nodelet vins_lib)

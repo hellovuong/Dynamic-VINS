@@ -1,4 +1,5 @@
 #include "solve_5pts.h"
+#include <Eigen/src/Core/Matrix.h>
 #include <sophus/se3.hpp>
 #include <sophus/so3.hpp>
 using Sophus::SE3;
@@ -255,9 +256,10 @@ bool MotionEstimator::solveRelativeRT_PNP(
 
   Vector3d tran(tvec.at<double>(0, 0), tvec.at<double>(1, 0),
                 tvec.at<double>(2, 0));
-  Matrix3d rota =
-      SO3(rvec.at<double>(0, 0), rvec.at<double>(1, 0), rvec.at<double>(2, 0))
-          .matrix();
+  Matrix3d rota = SO3<double>::exp(Eigen::Vector3d(rvec.at<double>(0, 0),
+                                                   rvec.at<double>(1, 0),
+                                                   rvec.at<double>(2, 0)))
+                      .matrix();
 
   //	Vector2d tp1,residualV;
   //	Vector3d tp23d;
